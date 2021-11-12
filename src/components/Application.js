@@ -24,7 +24,6 @@ export default function Application(props) {
   ];
 
   const [day, setDay] = useState('Monday')
-  // const [interviewer, setinterviewer] = useState('Monday')
 
   return (
     <main className="layout">
@@ -38,8 +37,8 @@ export default function Application(props) {
         <nav className="sidebar__menu">
         <DayList
           days={days}
-          day={day}
-          setDay={setDay}
+          value={day}
+          onChange={setDay}
         />
         </nav>
         <img
