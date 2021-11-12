@@ -5,12 +5,13 @@ export default function DayList(props) {
 
    return (
       <ul>
-         {props.days.map(function(element, index){
+         {props.days.map(function(day){
            return <DayListItem 
-            key={props.days[index].id}
-            name={props.days[index].name} 
-            spots={props.days[index].spots} 
-            selected={props.days[index].name === props.day}
+            key={day.id}
+            id={day.name}
+            name={day.name} 
+            spots={day.spots} 
+            selected={day.name === props.day}
             setDay={props.setDay} 
             />
          })}
