@@ -6,7 +6,17 @@ import { useState, useEffect } from "react";
 import  Appointment from "../components/Appointment/"
 
 export default function Application(props) {
-  const [days, setDays] = useState([]);
+
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    // you may put the line below, but will have to remove/comment hardcoded appointments variable
+    // appointments: {}
+  });
+  
+  const setDay = (day) => setState({ ...state, day });
+  const setDays = (days) => setState({ ...state, days });
+  // const setDays = (days) => setState({ ...state, days });
 
   useEffect(() => {
     let url = 'http://localhost:8001/api/days'
@@ -65,8 +75,6 @@ export default function Application(props) {
    )
   })
 
-  const [day, setDay] = useState('Monday')
-
   return (
     <main className="layout">
       <section className="sidebar">
@@ -78,8 +86,8 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
         <DayList
-          days={days}
-          value={day}
+          days={state.days}
+          value={state.day}
           onChange={setDay}
         />
         </nav>
