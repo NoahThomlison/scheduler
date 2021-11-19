@@ -1,8 +1,10 @@
 export function getAppointmentsForDay (state, day) {
+  console.log(state)
+  console.log(day)
   //empty array to hold results
   let appointments = []
 
-  //filter the data to matching state.name with day given
+  // filter the data to matching state.name with day given
   const filteredState = state.days.filter(state => state.name === day)
 
   //if filtered data is empty, return
