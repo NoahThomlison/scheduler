@@ -1,6 +1,4 @@
 export function getAppointmentsForDay (state, day) {
-  console.log(state)
-  console.log(day)
   //empty array to hold results
   let appointments = []
 
@@ -17,4 +15,26 @@ export function getAppointmentsForDay (state, day) {
   })
 
   return(appointments)
+}
+
+//function which returns interview object if an interview is scheduled
+export function getInterview (state, interview) {
+
+  //if there is no interview scheduales return null
+  if(interview === null){return(null)}
+
+  let interviewerID = interview.interviewer  
+  interview.interviewer = state.interviewers[interviewerID]
+
+  //return new object that has interview information and student information
+  let returnObject = {  
+    "student": interview.student,
+    "interviewer": {  
+      "id": state.interviewers[interviewerID].id,
+      "name": state.interviewers[interviewerID].name,
+      "avatar": state.interviewers[interviewerID].avatar
+    }
+  }
+
+  return(returnObject)
 }
