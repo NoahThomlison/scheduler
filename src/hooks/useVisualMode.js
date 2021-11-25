@@ -32,10 +32,7 @@ export default function useVisualMode (initial) {
       return(prevState.slice(0, prevState.length-1))
     })
   }
-
-  console.log(mode)
-  console.log(history)
-
+  
   return { mode, transition, back }
 }
 
