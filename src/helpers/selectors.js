@@ -23,7 +23,6 @@ export function getInterviewersForDay (state, day) {
 
   // filter the data to matching state.name with day given
   const filteredState = state.days.filter(state => state.name === day)
-  console.log(filteredState)
 
   //if filtered data is empty, return
   if(filteredState.length < 1){return(interviewers)
@@ -40,21 +39,14 @@ export function getInterviewersForDay (state, day) {
 //function which returns interview object if an interview is scheduled
 export function getInterview (state, interview) {
 
-  //if there is no interview scheduales return null
-  if(interview === null){return(null)}
+ //if no interview scheduled return null
+  if(!interview){return(null)}
 
+  //get interviewerID
   let interviewerID = interview.interviewer  
-  interview.interviewer = state.interviewers[interviewerID]
 
-  //return new object that has interview information and student information
-  let returnObject = {  
-    "student": interview.student,
-    "interviewer": {  
-      "id": state.interviewers[interviewerID].id,
-      "name": state.interviewers[interviewerID].name,
-      "avatar": state.interviewers[interviewerID].avatar
-    }
-  }
+  //create new object with old interivew data and new interviwer data
+  let returnObject = {...interview, interviewer: state.interviewers[interviewerID]}
 
   return(returnObject)
 }
