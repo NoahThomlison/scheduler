@@ -51,6 +51,25 @@ export default function Application(props) {
      })
    }
 
+   function cancelInterview (id, interview) {
+
+    return axios.delete(`/api/appointments/${id}`).then((res) => {
+      console.log(res)
+      const appointment = {
+        ...state.appointments[id],
+        interview: null
+      };
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
+      setState({
+        ...state, 
+        appointments})
+      })
+    }
+ 
+
   let appointmentsArray = (dailyAppointments).map((appointment) => {
     const interview = getInterview(state, appointment.interview);
     return (
@@ -61,6 +80,8 @@ export default function Application(props) {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        cancelInterview={cancelInterview}
+
       />
     );
   });
