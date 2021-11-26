@@ -31,7 +31,6 @@ export default function Form (props) {
         </form>
         <InterviewerList 
           value={interviewer}
-          interviewer={interviewer} 
           interviewers={props.interviewers}
           onChange={setInterviewer} 
         />
