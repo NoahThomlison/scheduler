@@ -33,18 +33,20 @@ export default function Appointment(props) {
     };
     
     transition(SAVING)
-    props.bookInterview(props.id, newInterview).then((res) => {
-      console.log(res)
-      res === "error" ? transition(ERRORSAVE) : transition(SHOW)
-    })
-  }
 
+    props.bookInterview(props.id, newInterview)
+    .then(() => transition(SHOW))
+    .catch(error => transition(ERRORSAVE, true));
+  }
+  console.log(props)
   function deleting(name, interviewer) {
-    transition(DELETE)
-    props.cancelInterview(props.id).then((res) => {
-      console.log(res)
-      res === "error" ? transition(ERRORDELETE) : transition(EMPTY)
-    })
+    transition(DELETE, true)
+    props.cancelInterview(props.id)
+    .then(() => {
+      transition(EMPTY)})
+    .catch(error => {
+      transition(ERRORDELETE, true)
+    });
   }
 
   function confirm() {
@@ -66,7 +68,7 @@ export default function Appointment(props) {
       {mode === EDIT && <Form student={props.interview.student} interviewer={props.interview.interviewer.id} interviewers={props.interviewers} onCancel={back} onSave={save}/>}
 
       {mode === SAVING && <Status/>}
-      {mode === ERRORSAVE && <Error message="Saving Failed" onClose={() => transition(EMPTY)}/>}
+      {mode === ERRORSAVE && <Error message="Saving Failed" onClose={back}/>}
 
       {mode === SHOW && 
       ( <Show
@@ -78,7 +80,7 @@ export default function Appointment(props) {
       )}
 
       {mode === DELETE && <Status message="Deleting"/>}
-      {mode === ERRORDELETE && <Error message="Deleting Failed" onClose={() => transition(SHOW)}/>}
+      {mode === ERRORDELETE && <Error message="Deleting Failed" onClose={back}/>}
 
       {mode === CONFIRM && <Confirm message={deleteMessage} onCancel={back} onConfirm={deleting}/>}
 
