@@ -8,16 +8,14 @@ export default function useVisualMode (initial) {
     setMode(newMode)
 
     //if replace true then replace last value in history with new value
-    if(replace){
-      setHistory((prevState) => {
-        return(prevState.slice(0, prevState.length-1))
-      })
-    }
+    if(replace) {setHistory(
+      (prevState) => ([...prevState.slice(0, prevState.length-1)]))}
 
     //set history to new array with newMode added
-    setHistory((prevState) => {
-      return([...prevState, newMode])
-    })
+    setHistory((prevState) => 
+      ([...prevState, newMode])
+    )
+
   }
 
   function back () {
@@ -29,11 +27,9 @@ export default function useVisualMode (initial) {
 
     //set history to previous value -1 value
     setHistory((prevState) => {
-      return(prevState.slice(0, prevState.length-1))
+      return([...prevState.slice(0, prevState.length-1)])
     })
   }
   
   return { mode, transition, back }
 }
-
-
