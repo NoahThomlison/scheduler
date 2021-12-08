@@ -87,7 +87,6 @@ export default function useApplicationData (initial) {
     //loop through dailyAppointsments and could the number of null interviews
     for (const day of dailyAppointments) {
       if(day.interview === null){
-        console.log('ding')
         spots += 1
       }
     }
@@ -106,7 +105,6 @@ export default function useApplicationData (initial) {
       }
       daysArray.push(dayObject)
     }
-    console.log(daysArray)
 
     return(daysArray)
   }
