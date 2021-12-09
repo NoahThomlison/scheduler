@@ -31,8 +31,13 @@ export default function Appointment(props) {
       student: name,
       interviewer
     };
-    
+
     transition(SAVING)
+    
+    if(!interviewer){
+      transition(ERRORSAVE, true)
+      return
+    }
 
     props.bookInterview(props.id, newInterview)
     .then(() => transition(SHOW))
