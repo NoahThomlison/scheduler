@@ -42,7 +42,7 @@ export default function useApplicationData (initial) {
          ...state.appointments,
          [id]: appointment
       };
-      const days = updateSpots(id)
+      const days = updateSpots(id, appointments)
       setState({
          ...state, 
          appointments, days})
@@ -64,12 +64,11 @@ export default function useApplicationData (initial) {
         ...state.appointments,
         [id]: appointment
       };
-      const days = updateSpots(id)
-
+      const days = updateSpots(id, appointments)
       setState({
         ...state, 
         appointments, days})
-      })
+     })
       .catch((err) => {
         return(Promise.reject(err))
       })
@@ -77,9 +76,10 @@ export default function useApplicationData (initial) {
     }
   
 
-  function updateSpots (id) {
+  function updateSpots (id, appointments) {
+    const updateSpotsState = {...state, appointments}
+    const dailyAppointments = getAppointmentsForDay(updateSpotsState, state.day);
 
-    const dailyAppointments = getAppointmentsForDay(state, state.day);
     let spots = 0
     let dayObject = {}
     let daysArray = []
@@ -90,10 +90,6 @@ export default function useApplicationData (initial) {
         spots += 1
       }
     }
-
-    //swap value for given id
-    (state.appointments[id].interview ? spots += 1 : spots -= 1)
-
 
     //rebuild state.day object but substititue spots for the one day in question
     for (const day of state.days) {
