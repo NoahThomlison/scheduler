@@ -48,6 +48,14 @@ Interview Scheduler is a single-page application (SPA) that allows users to book
 
 Install dependencies with `npm install`.
 
+### Dependencies
+    "axios": "^0.19.0",
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.15",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-scripts": "3.0.1"
+
 ## Running Webpack Development Server
 
 ```sh
